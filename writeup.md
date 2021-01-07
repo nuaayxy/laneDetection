@@ -22,7 +22,9 @@ My pipeline consisted following steps.
 
 In order to draw a single line on the left and right lanes, I modified the draw_lines() function by: 
 * checking the slope of the line segements from the hough. The lines segments will be grouped into two arrays 
-* then I use numpy.polyfit to fit two lines using all the x and y from each array. Thus the line segments are averaged somehow by least square. 
+* Left and right lane is determined by slope value
+* then I use numpy.polyfit to fit two lines using all the x and y from each array. 
+* the line segments are averaged by least square inside np.polyfit function. 
 
 ![alt text][image1]
 
@@ -35,6 +37,6 @@ One potential shortcoming would be in the challenging case, there are quite some
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to further adjust the parameters of the hough, color masking and region of interest
-
-Another potential improvement could be to use the video sequence information so that lane cannot jump in between consequent images. 
+* A possible improvement would be to further adjust the parameters of the hough, color masking and region of interest
+* Another potential improvement could be to use the video sequence information so that lane cannot jump in between consequent images. 
+* it is also possilbe to remove outlier lines using RANSAC or some noise filtering method so that they do not contribute to the final lanes
