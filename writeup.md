@@ -14,12 +14,15 @@ The goals / steps of this project are the following:
 ### 1. Algo pipeline
 
 My pipeline consisted following steps. 
-First, I converted the images to grayscale, but I also keep the color image for color masking. 
-Gaussianblur is peformed on the grayscale image to remove noise.
-Region of interest is selected using a quad as well as color information(Lane should be yellow/white in this case)
-Then Houghline detection is used in the region of interest.
+* First, I converted the images to grayscale
+* I also keep the color image for color masking combined with region of interest
+* Gaussianblur is peformed on the grayscale image to remove noise.
+* Region of interest is selected using a quad as well as color information(Lane should be yellow/white in this case)
+* Then Houghline detection is used in the region of interest.
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by checking the slope of the line segements from the hough. The lines segments will be grouped into two arrays and then I use numpy.polyfit to fit two lines using all the x and y from each array. Thus the line segments are averaged somehow by least square. 
+In order to draw a single line on the left and right lanes, I modified the draw_lines() function by: 
+* checking the slope of the line segements from the hough. The lines segments will be grouped into two arrays 
+* then I use numpy.polyfit to fit two lines using all the x and y from each array. Thus the line segments are averaged somehow by least square. 
 
 ![alt text][image1]
 
