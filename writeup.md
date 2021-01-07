@@ -1,33 +1,25 @@
 # **Finding Lane Lines on the Road** 
 
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file. But feel free to use some other method and submit a pdf if you prefer.
-
----
 
 **Finding Lane Lines on the Road**
 
 The goals / steps of this project are the following:
 * Make a pipeline that finds lane lines on the road
-* Reflect on your work in a written report
-
-
-[//]: # (Image References)
-
-[image1]: ./examples/grayscale.jpg "Grayscale"
+* Reflect on the work 
 
 ---
 
 ### Reflection
 
-### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
+### 1. Algo pipeline
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+My pipeline consisted following steps. 
+First, I converted the images to grayscale, but I also keep the color image for color masking. 
+Gaussianblur is peformed on the grayscale image to remove noise.
+Region of interest is selected using a quad as well as color information(Lane should be yellow/white in this case)
+Then Houghline detection is used in the region of interest.
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
-
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
+In order to draw a single line on the left and right lanes, I modified the draw_lines() function by checking the slope of the line segements from the hough. The lines segments will be grouped into two arrays and then I use numpy.polyfit to fit two lines using all the x and y from each array. Thus the line segments are averaged somehow by least square. 
 
 ![alt text][image1]
 
@@ -35,13 +27,11 @@ If you'd like to include images to show how the pipeline works, here is how to i
 ### 2. Identify potential shortcomings with your current pipeline
 
 
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
+One potential shortcoming would be in the challenging case, there are quite some false positive lines, and it makes the lane jumps. 
 
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
+A possible improvement would be to further adjust the parameters of the hough, color masking and region of interest
 
-Another potential improvement could be to ...
+Another potential improvement could be to use the video sequence information so that lane cannot jump in between consequent images. 
